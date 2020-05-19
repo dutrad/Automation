@@ -11,7 +11,7 @@ echo "Github password:"
 read -s password
 
 cd ~/Documents/GitHub/
-python ~/Documents/GitHub/Automation/NewGitProject/github.py $1 $password
+python3 ~/Documents/GitHub/Automation/NewGitProject/github.py $1 $password >> 2&>1
 mkdir $1
 cd $1
 git init
