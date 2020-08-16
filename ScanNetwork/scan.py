@@ -1,18 +1,36 @@
-import sys
-import subprocess 
-import os
-from decouple import config
+import subprocess
 
-IP_NETWORK = config('IP_NETWORK')
-IP_DEVICE = config('IP_DEVICE')
+IP_NETWORK = '192.168.1.'
 
-proc = subprocess.Popen(["ping", IP_NETWORK],stdout=subprocess.PIPE)
+def checkIp(ip):
+  ip = IP_NETWORK + str(ip)
+  resp = subprocess.call(['ping', '-c', '1', ip], stdout=subprocess.DEVNULL)
+
+  return (resp == 0)
+
+def getNames():
+  d = {}
+  with open("ips.txt") as f:
+    for line in f:
+      (key, val) = line.split()
+      d[int(key)] = val
+  return d
+
+names = getNames()
+connected = [False] * 100
+
 while True:
-  line = proc.stdout.readline()
-  if not line:
-    break
-  #the real code does filtering here
-  connected_ip = line.decode('utf-8').split()[3]
+  for i in range(64,101):
+    resp = checkIp(i)
 
-  if connected_ip == IP_DEVICE:
-      subprocess.Popen(["say", "Linnea just connected to the network"])
+    if resp != connected[i]:
+      connected[i] = resp
+      name = names.get(i)
+      if resp:
+          print("ping to " + str(name) + " OK")
+      else:
+          print("ping to " + str(name) + "failed!")
+
+
+
+
