@@ -1,4 +1,5 @@
 import subprocess
+import datetime
 
 IP_NETWORK = '192.168.1.'
 
@@ -20,16 +21,27 @@ names = getNames()
 connected = [False] * 100
 
 while True:
-  for i in range(64,101):
+  for i in range(64,100):
     resp = checkIp(i)
 
     if resp != connected[i]:
       connected[i] = resp
       name = names.get(i)
+      msg = ""
+      now = datetime.datetime.now()
+      if not name:
+          name = i
       if resp:
-          print("ping to " + str(name) + " OK")
+          msg = now.strftime("%c") + " " + str(name) + " online\n"
       else:
-          print("ping to " + str(name) + "failed!")
+          msg = now.strftime("%d/%m/%Y %H:%M:%S") + " " + str(name) + " offline\n"
+
+      with open('out.txt', 'a+') as file:
+          file.write(msg)
+
+
+
+
 
 
 
