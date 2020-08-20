@@ -37,3 +37,6 @@ while True:
           msg = now.strftime("%c") + " " + str(name) + " online\n"
       else:
           msg = now.strftime("%d/%m/%Y %H:%M:%S") + " " + str(name) + " offline\n"
+      
+      with open('out.txt', 'a+') as file:
+          file.write(msg)
