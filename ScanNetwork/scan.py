@@ -1,5 +1,6 @@
 import subprocess
 import datetime
+import sys
 
 IP_NETWORK = '192.168.1.'
 
@@ -11,7 +12,8 @@ def checkIp(ip):
 
 def getNames():
   d = {}
-  with open("ips.txt") as f:
+  fileName = sys.argv[1]
+  with open(fileName) as f:
     for line in f:
       (key, val) = line.split()
       d[int(key)] = val
@@ -35,14 +37,3 @@ while True:
           msg = now.strftime("%c") + " " + str(name) + " online\n"
       else:
           msg = now.strftime("%d/%m/%Y %H:%M:%S") + " " + str(name) + " offline\n"
-
-      with open('out.txt', 'a+') as file:
-          file.write(msg)
-
-
-
-
-
-
-
-
