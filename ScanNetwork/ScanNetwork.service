@@ -1,0 +1,9 @@
+[Unit]
+Description=Python script that scans all available ips on network
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3.7 /home/pi/Documents/Automation/ScanNetwork/scan.py /home/pi/Documents/Automation/ScanNetwork/ips.txt
+
+[Install]
+WantedBy=multi-user.target
