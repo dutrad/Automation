@@ -23,11 +23,14 @@ def getnames():
 
 
 names = getnames()
-connected = [False] * 100
+connected = [False] * 90
 fileName = sys.argv[2]
 
+for i in range(64, 90):
+    connected[i] = checkIp(i)
+
 while True:
-    for i in range(64, 100):
+    for i in range(64, 90):
         resp = checkIp(i)
 
         if resp != connected[i]:
