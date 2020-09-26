@@ -1,0 +1,11 @@
+{
+    "Products": [
+        {
+            "last_price": 179.95,
+            "link": "https://www.ikohs.com/pt/comprar-robots-aspiradores/35691-netbot-s18-robo-aspirador-lava-chaos.html?id_c=74940",
+            "lowest_price": 179.95,
+            "name": "NETBOT S18",
+            "price_element": "js-product-summary-price"
+        }
+    ]
+}
