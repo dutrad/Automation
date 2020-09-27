@@ -1,0 +1,9 @@
+[Unit]
+Description=Python script that scans prices for products in a list
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3.7 /home/pi/Documents/Automation/CheckPrices/price_scraper.py
+
+[Install]
+WantedBy=multi-user.target
