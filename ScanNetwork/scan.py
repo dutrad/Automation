@@ -7,7 +7,7 @@ IP_NETWORK = '192.168.1.'
 
 def checkIp(ip):
     ip = IP_NETWORK + str(ip)
-    out = subprocess.call(['ping', '-c', '1', ip], stdout=subprocess.DEVNULL)
+    out = subprocess.call(['ping', '-c', '3', ip], stdout=subprocess.DEVNULL)
 
     return out == 0
 
