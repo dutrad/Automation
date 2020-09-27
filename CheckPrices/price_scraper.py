@@ -12,6 +12,7 @@ def checkPrices():
     options = web_driver_conf.get_web_driver_options()
     web_driver_conf.set_ignore_certificate_error(options)
     web_driver_conf.set_browser_as_incognito(options)
+    web_driver_conf.set_automation_as_head_less(options)
     driver = web_driver_conf.get_chrome_web_driver(options)
 
     with open('products.json') as json_file:
