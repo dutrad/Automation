@@ -6,7 +6,8 @@ def sendMail(subject, body):
     port = 465  # For SSL
     smtp_server = "smtp.gmail.com"
 
-    with open(os.path.join(sys.path[0], "info.txt")) as f:
+    infoPath = os.path.join(os.path.dirname(__file__), 'info.txt')
+    with open(infoPath) as f:
         lines = f.readlines()
         sender_email = lines[0]
         receiver_email = lines[1]
