@@ -1,21 +1,19 @@
-import requests 
-import json
-from bs4 import BeautifulSoup
+import requests, json, os, time, sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from product import Product
-from utils import convert_price_toNumber
 import web_driver_conf
-import time
+
+sys.path.append(os.path.join(sys.path[0], "..", "SendEmail"))
+from mail import sendMail
 
 def checkPrices():
     options = web_driver_conf.get_web_driver_options()
-    web_driver_conf.set_ignore_certificate_error(options)
-    web_driver_conf.set_browser_as_incognito(options)
-    web_driver_conf.set_automation_as_head_less(options)
+    web_driver_conf.set_all(options)
     driver = web_driver_conf.get_chrome_web_driver(options)
 
-    with open('products.json') as json_file:
+    jsonPath = os.path.join(os.path.dirname(__file__), 'products.json')
+    with open(jsonPath) as json_file:
         data = json.load(json_file)
 
     prodList = data['Products']
@@ -29,12 +27,13 @@ def checkPrices():
         prod.last_price = float(element.text.replace(',','.'))
         if(prod.last_price < prod.lowest_price):
             prod.lowest_price = prod.last_price
+            sendMail(prod.name, "Novo preço: " + str(prod.last_price))
 
         products.append(prod)
 
     driver.close()
 
-    with open('products.json', 'w') as json_file:
+    with open(jsonPath, 'w') as json_file:
         data = {}
         data["Products"] = []
         for prod in products:
