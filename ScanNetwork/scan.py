@@ -1,9 +1,11 @@
 import subprocess
 import datetime
-import sys
+import sys, os
+
+sys.path.append(os.path.join(sys.path[0], "..", "SendEmail"))
+from mail import sendMail
 
 IP_NETWORK = '192.168.1.'
-
 
 def checkIp(ip):
     ip = IP_NETWORK + str(ip)
@@ -42,6 +44,7 @@ while True:
                 name = i
             if resp:
                 msg = now.strftime("%c") + " " + str(name) + " online\n"
+                sendMail(str(name) + " is online", msg)
             else:
                 msg = now.strftime("%d/%m/%Y %H:%M:%S") + " " + str(name) + " offline\n"
 
