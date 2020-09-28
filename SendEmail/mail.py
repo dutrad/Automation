@@ -23,9 +23,10 @@ def sendMail(subject, body):
     try:
         with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
             server.login(sender_email, password)
-            server.sendmail(sender_email, receiver_email, msg.as_string())
+            server.sendmail(sender_email, receiver_email, msg.as_string().encode('utf-8'))
     
-    except:
-        print("Error sending email with subject:" + subject)
+    except Exception as e:
+        print("Error sending email with subject: " + subject)
+        print(str(e))
 
 

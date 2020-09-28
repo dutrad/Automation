@@ -22,9 +22,11 @@ def set_no_sandbox(options):
 def disable_dev_shm_usage(options):
     options.add_argument('--disable-dev-shm-usage')
 
-def set_all(options):
+def get_chrome_driver_with_options():
+    options = get_web_driver_options()
     set_automation_as_head_less(options)
     set_browser_as_incognito(options)
     set_ignore_certificate_error(options)
     set_no_sandbox(options)
     disable_dev_shm_usage(options)
+    return get_chrome_web_driver(options)

@@ -8,9 +8,7 @@ sys.path.append(os.path.join(sys.path[0], "..", "SendEmail"))
 from mail import sendMail
 
 def checkPrices():
-    options = web_driver_conf.get_web_driver_options()
-    web_driver_conf.set_all(options)
-    driver = web_driver_conf.get_chrome_web_driver(options)
+    driver = web_driver_conf.get_chrome_driver_with_options()
 
     jsonPath = os.path.join(os.path.dirname(__file__), 'products.json')
     with open(jsonPath) as json_file:
