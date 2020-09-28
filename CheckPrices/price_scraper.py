@@ -30,6 +30,7 @@ def checkPrices():
         products.append(prod)
 
     driver.close()
+    driver.quit()
 
     with open(jsonPath, 'w') as json_file:
         data = {}
