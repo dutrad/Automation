@@ -1,6 +1,4 @@
 import requests, json, os, time, sys
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from product import Product
 import web_driver_conf
 
@@ -20,14 +18,16 @@ def checkPrices():
 
     for prodJson in prodList:
         prod.from_json(prodJson)
+
         driver.get(prod.link)
         element = driver.find_elements_by_class_name(prod.price_element)[0]
         prod.last_price = float(element.text.replace(',','.'))
+        
         if(prod.last_price < prod.lowest_price):
             prod.lowest_price = prod.last_price
             sendMail(prod.name, "Novo preço: " + str(prod.last_price))
 
-        products.append(prod)
+        products.append(prod.copy())
 
     driver.close()
     driver.quit()

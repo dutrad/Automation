@@ -22,3 +22,6 @@ class Product:
         self.lowest_price = json_["lowest_price"]
         self.link = json_["link"]
         self.price_element = json_["price_element"]
+    
+    def copy(self):
+        return Product(self.name, self.last_price, self.lowest_price, self.link, self.price_element)
