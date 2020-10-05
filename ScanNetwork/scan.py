@@ -16,27 +16,36 @@ def checkIp(ip):
 
 def getnames():
     d = {}
-    file = sys.argv[1]
+    l = []
+    file = os.path.join(os.path.dirname(__file__), 'ips.txt')
     with open(file) as f:
         for line in f:
+            if not line.strip():
+                break
             (key, val) = line.split()
             d[int(key)] = val
-    return d
+        
+        next(f)
+        for line in f:
+            l.append(int(line.strip()))
+
+    return [d,l]
 
 
-names = getnames()
-connected = [False] * 90
-fileName = sys.argv[2]
+[names, ignore] = getnames()
+fileName = os.path.join(os.path.join(sys.path[0], 'out.txt'))
 
+ips = {}
 for i in range(64, 90):
-    connected[i] = checkIp(i)
+    if i not in ignore:
+        ips[i] = checkIp(i)
 
 while True:
-    for i in range(64, 90):
-        resp = checkIp(i)
+    for ip, conn in ips.items():
+        resp = checkIp(ip)
 
-        if resp != connected[i]:
-            connected[i] = resp
+        if resp != conn:
+            conn = resp
             name = names.get(i)
             msg = ""
             now = datetime.datetime.now()
