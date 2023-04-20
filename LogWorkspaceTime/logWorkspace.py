@@ -15,6 +15,13 @@ def increment_time():
     with open(TIME_FILE, 'w') as file:
         file.write(str(time_int)+'\n')
     
+    hours = time_int // 3600
+    time_int = time_int - hours*3600
+    minutes = time_int // 60
+    seconds = time_int % 60
+
+    print("{}:{}:{}".format(hours, minutes, seconds), end='\r')
+    
 def main():
     while True:
         if os.popen(WORKSPACE_CMD).read().strip() == '1':
