@@ -16,7 +16,7 @@ def increment_time():
     with open(TIME_FILE, 'w') as file:
         file.write(str(time_int)+'\n')
 
-    print(str(timedelta(seconds=time_int)))
+    print(str(timedelta(seconds=time_int)), end='\r')
     
 def main():
     while True:
