@@ -1,5 +1,6 @@
 import os
 from time import sleep
+from datetime import timedelta
 
 WORKSPACE_CMD = "wmctrl -d | grep '*' | cut -d ' ' -f1"
 TIME_FILE = 'workspacetime.txt'
@@ -14,13 +15,8 @@ def increment_time():
     time_int = int(time) + SLEEP_TIME
     with open(TIME_FILE, 'w') as file:
         file.write(str(time_int)+'\n')
-    
-    hours = time_int // 3600
-    time_int = time_int - hours*3600
-    minutes = time_int // 60
-    seconds = time_int % 60
 
-    print("{}:{}:{}".format(hours, minutes, seconds), end='\r')
+    print(str(timedelta(seconds=time_int)))
     
 def main():
     while True:
