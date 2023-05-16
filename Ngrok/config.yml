@@ -1,0 +1,7 @@
+version: 2
+
+authtoken: 24VLxBwhTqA7LTCziaZphpvlRYs_2X9w4jfiXWx8RpExYojHB
+tunnels:
+    default:
+        proto: http
+        addr: 80
