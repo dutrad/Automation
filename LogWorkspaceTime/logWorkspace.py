@@ -18,7 +18,7 @@ def increment_time():
 
     time_json[today] = time_json.get(today, 0) + SLEEP_TIME
     with open(TIME_FILE, 'w') as file:
-        json.dump(time_json, file)
+        json.dump(time_json, file, indent=4)
 
     show_total(time_json)
 
@@ -26,7 +26,7 @@ def increment_time():
 def show_total(time_json):
     today = date.today()
     dates = [today + timedelta(days=i)
-             for i in range(0 - today.weekday(), 7 - today.weekday())]
+             for i in range(0 - today.weekday(), 7 - today.weekday()) if i <= 0]
 
     total = 0
     for day in dates:
